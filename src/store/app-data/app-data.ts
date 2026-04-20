@@ -4,7 +4,7 @@ import { AppData } from '../../types/state';
 import { fetchOffersAction } from '../api-actions';
 import { RequestStatus } from '../../const';
 import { postFavorite } from '../api-actions';
-import { logoutAction } from '../api-actions';
+import { logoutAction, loginAction } from '../api-actions';
 
 const initialState: AppData = {
   offers: [],
@@ -35,6 +35,9 @@ const appData = createSlice({
             return;
           }
         }
+      })
+      .addCase(loginAction.fulfilled, (state) => {
+        state.status = RequestStatus.Idle;
       })
       .addCase(logoutAction.fulfilled, () => initialState);
   }
